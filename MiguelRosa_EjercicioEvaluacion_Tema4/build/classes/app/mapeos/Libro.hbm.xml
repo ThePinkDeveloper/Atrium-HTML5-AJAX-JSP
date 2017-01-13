@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.grupoatrium.modelo.Libro" table="Libros">
+        
+        <id name="IDLibro" column="ID_LIBRO" type="int">
+            <generator class="increment" />
+        </id>
+      
+        <property name="titulo" column="TITULO" type="string"
+                  not-null="true" unique="true" length="60" lazy="false"/>
+
+        <property name="isbn" column="ISBN" type="string"
+                  not-null="false" unique="true" length="20" lazy="false"/>
+                  
+        <property name="publicacion" column="PUBLICACION" type="int"
+                  not-null="false" unique="false" length="4" lazy="false"/>
+                  
+        <property name="precio" column="PRECIO" type="double"
+                  not-null="false" unique="false" length="6" lazy="false"/>
+                  
+        <property name="descripcion" column="DESCRIPCION" type="string"
+				  not-null="false" unique="false" length="255" lazy="false"/>
+				  
+		<set lazy = "false" name="autores" table="libros_autores" cascade="all">
+			<key column="ID_LIBRO"/>
+			<many-to-many column="ID_AUTOR" class="com.grupoatrium.modelo.Autor" lazy = "false"/>
+		</set>
+		
+		<many-to-one lazy = "false" unique="false" name="editorial" column="NOMBRE"
+					 not-null="true" cascade="all"/>
+		
+                  
+		          
+	</class>
+
+</hibernate-mapping>

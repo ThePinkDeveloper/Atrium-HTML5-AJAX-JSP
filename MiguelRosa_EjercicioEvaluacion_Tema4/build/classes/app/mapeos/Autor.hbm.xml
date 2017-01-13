@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.grupoatrium.modelo.Autor" table="Autores">
+      
+        <id name="nombre" column="NOMBRE" type="string" length="50" >
+			<generator class="assigned" />
+		</id>
+		
+        <property name="nacionalidad" column="NACIONALIDAD" type="string"
+                  not-null="false" unique="false" length="20" lazy="false"/>
+                  
+        <property name="comentarios" column="COMENTARIOS" type="string"
+                  not-null="false" unique="false" length="255" lazy="false"/>
+                  
+        <set lazy = "false" name="libros" inverse="true" table="libros_autores" cascade="all">
+        	<key column="ID_AUTOR"/>
+        	<many-to-many column="ID_LIBRO" class="com.grupoatrium.modelo.Libro"/>
+        </set>
+                  
+		          
+	</class>
+
+</hibernate-mapping>
